@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: 'red'
   },
   form: {
     width: '100%', // Fix IE 11 issue.
@@ -45,7 +45,9 @@ const useStyles = makeStyles((theme) => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
+    background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)'
   },
+  
 }));
 
 export default function SignUp() {
@@ -127,7 +129,7 @@ export default function SignUp() {
           </Button>
           <Grid container justifyContent="flex-end">
             <Grid item>
-              <Link href="#" variant="body2">
+              <Link href="/signin" variant="body2">
                 Already have an account? Sign in
               </Link>
             </Grid>
