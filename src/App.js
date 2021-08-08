@@ -2,10 +2,13 @@ import SignInSide from './components/SignIn/SignInSide';
 import Signup from './components/SignUp/Signup';
 import { BrowserRouter as Router, Switch, Route, Link, Redirect } from "react-router-dom";
 
+import { AuthProvider } from './contexts/AuthContext';
 import './App.css';
 
 function App() {
   return (
+    <AuthProvider>
+
    <Router>
      <Switch>
        <Route exact path="/" component={SignInSide}></Route>
@@ -13,6 +16,7 @@ function App() {
        <Route exact path="/signin" component={SignInSide}></Route>
      </Switch>
    </Router>
+   </AuthProvider>
   );
 }
 

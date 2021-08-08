@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useRef, useState} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -12,46 +12,56 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import Copyright from '../Copyright/Copyright';
+import { useAuth } from '../../contexts/AuthContext';
+import { Alert } from '@material-ui/lab';
+
 
 import './Signup.styles.css';
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+import useStyles from './Signup.styles';
 
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: 'red'
-  },
-  form: {
-    width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(3),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-    background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)'
-  },
-  
-}));
+
+
 
 export default function SignUp() {
+
+  const emailRef = useRef();
+  const passwordRef = useRef();
+  const passwordConfirmRef = useRef();
   const classes = useStyles();
+  const { signup, currentUser } = useAuth();
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+
+
+ async function handleSubmit(e){
+    e.preventDefault();
+    const email = emailRef.current.value;
+    const password = passwordRef.current.value;
+    const passwordConfirm = passwordConfirmRef.current.value;
+
+      if(password !== passwordConfirm){
+        setError('Passwords do not match');
+        return;
+    
+      }
+
+      try{
+        setError('');
+        setLoading(true);
+        await signup(email, password);
+        
+      } catch{
+        setError('Error signing up');
+        return;
+      }
+
+      setLoading(false);
+      
+
+  }
+  
 
   return (
     <Container component="main" maxWidth="xs">
@@ -63,6 +73,8 @@ export default function SignUp() {
         <Typography component="h1" variant="h5">
           Sign up
         </Typography>
+        {error && <Alert severity="error">{error}</Alert>}
+        {currentUser.email}
         <form className={classes.form} noValidate>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
@@ -97,6 +109,7 @@ export default function SignUp() {
                 label="Email Address"
                 name="email"
                 autoComplete="email"
+                inputRef={emailRef}
               />
             </Grid>
             <Grid item xs={12}>
@@ -109,14 +122,23 @@ export default function SignUp() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                inputRef={passwordRef}
               />
             </Grid>
             <Grid item xs={12}>
-              <FormControlLabel
-                control={<Checkbox value="allowExtraEmails" color="primary" />}
-                label="I want to receive inspiration, marketing promotions and updates via email."
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                name="passwordConfirm"
+                label="Password Confirm"
+                type="password"
+                id="passwordConfirm"
+                autoComplete="current-password"
+                inputRef={passwordConfirmRef}
               />
             </Grid>
+          
           </Grid>
           <Button
             type="submit"
@@ -124,6 +146,8 @@ export default function SignUp() {
             variant="contained"
             color="primary"
             className={classes.submit}
+            onClick={handleSubmit}
+            disabled={loading}
           >
             Sign Up
           </Button>
