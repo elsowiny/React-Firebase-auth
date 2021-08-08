@@ -1,19 +1,8 @@
-@media screen and (max-width: 400px) {
+
     #features {
-      padding: 20px;
-      width: 111%;
+      padding: 100px;
     }
-    #about,
-    #services,
-    #testimonials,
-    #team,
-    #contact,
-    #footer {
-      width: 111%;
+
+    #about{
+     background-color: white;
     }
-  
-    #portfolio {
-      width: 110%;
-    }
-  }
-  
