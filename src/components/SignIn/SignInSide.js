@@ -16,6 +16,7 @@ import Copyright from '../Copyright/Copyright';
 
 import useStyles from './Signin.styles.js';
 
+import './SignIn.styles.css';
 
 
 
@@ -45,6 +46,7 @@ export default function SignInSide() {
               name="email"
               autoComplete="email"
               autoFocus
+              className="blackText"
             />
             <TextField
               variant="outlined"
@@ -56,6 +58,7 @@ export default function SignInSide() {
               type="password"
               id="password"
               autoComplete="current-password"
+              className="blackText"
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}

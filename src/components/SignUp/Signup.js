@@ -70,11 +70,14 @@ export default function SignUp() {
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
-        <Typography component="h1" variant="h5">
+        <Typography component="h1" variant="h5" className="whiteHeader">
           Sign up
         </Typography>
-        {error && <Alert severity="error">{error}</Alert>}
+        <Typography component="h1" variant="h5" className="whiteHeader">
         {currentUser.email}
+        </Typography>
+        {error && <Alert severity="error">{error}</Alert>}
+        
         <form className={classes.form} noValidate>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
@@ -87,6 +90,16 @@ export default function SignUp() {
                 id="firstName"
                 label="First Name"
                 autoFocus
+                InputProps={{
+                  className: classes.input
+                }}
+                InputLabelProps={{
+                  classes: {
+                    root: classes.label,
+                    focused: classes.focusedLabel,
+                    error: classes.errorLabel,
+                  }
+                }}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -98,6 +111,19 @@ export default function SignUp() {
                 label="Last Name"
                 name="lastName"
                 autoComplete="lname"
+               
+
+                InputProps={{
+                  className: classes.input
+                }}
+
+                InputLabelProps={{
+                  classes: {
+                    root: classes.label,
+                    focused: classes.focusedLabel,
+                    error: classes.errorLabel,
+                  }
+                }}
               />
             </Grid>
             <Grid item xs={12}>
@@ -110,6 +136,17 @@ export default function SignUp() {
                 name="email"
                 autoComplete="email"
                 inputRef={emailRef}
+                InputProps={{
+                  className: classes.input
+                }}
+
+                InputLabelProps={{
+                  classes: {
+                    root: classes.label,
+                    focused: classes.focusedLabel,
+                    error: classes.errorLabel,
+                  }
+                }}
               />
             </Grid>
             <Grid item xs={12}>
@@ -123,6 +160,17 @@ export default function SignUp() {
                 id="password"
                 autoComplete="current-password"
                 inputRef={passwordRef}
+                InputProps={{
+                  className: classes.input
+                }}
+
+                InputLabelProps={{
+                  classes: {
+                    root: classes.label,
+                    focused: classes.focusedLabel,
+                    error: classes.errorLabel,
+                  }
+                }}
               />
             </Grid>
             <Grid item xs={12}>
@@ -136,6 +184,18 @@ export default function SignUp() {
                 id="passwordConfirm"
                 autoComplete="current-password"
                 inputRef={passwordConfirmRef}
+
+                InputProps={{
+                  className: classes.input
+                }}
+
+                InputLabelProps={{
+                  classes: {
+                    root: classes.label,
+                    focused: classes.focusedLabel,
+                    error: classes.errorLabel,
+                  }
+                }}
               />
             </Grid>
           

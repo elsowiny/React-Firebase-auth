@@ -1,7 +1,5 @@
-.MuiFormLabel-root{
-    color: white!important;
+
+.whiteHeader{
+    color:white;
 }
 
-.MuiInputBase-input{
-    color: white!important;
-}
