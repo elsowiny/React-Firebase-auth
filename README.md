@@ -1,3 +1,7 @@
+
+<img  src="https://raw.githubusercontent.com/elsowiny/React-Firebase-auth/master/githubassets/signup.png?token=ABSHFY4FPIIFYI6O6GU26D3BC26NS" alt="cover" />
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
