@@ -16,6 +16,9 @@ import Copyright from '../Copyright/Copyright';
 import { useAuth } from '../../contexts/AuthContext';
 import { Alert } from '@material-ui/lab';
 
+import {  useHistory } from 'react-router-dom';
+
+
 
 import './Signup.styles.css';
 
@@ -33,6 +36,7 @@ export default function SignUp() {
   const { signup, currentUser } = useAuth();
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const history = useHistory();
 
 
  async function handleSubmit(e){
@@ -51,6 +55,7 @@ export default function SignUp() {
         setError('');
         setLoading(true);
         await signup(email, password);
+        history.push('/');
         
       } catch{
         setError('Error signing up');
@@ -60,6 +65,30 @@ export default function SignUp() {
       setLoading(false);
       
 
+  }
+
+
+  if(currentUser){
+   return (
+    <Container component="main" maxWidth="xs">
+    <CssBaseline />
+    <div className={classes.paper}>
+      <Avatar className={classes.avatar}>
+        <LockOutlinedIcon />
+      </Avatar>
+      <Typography component="h1" variant="h5" className="whiteHeader">
+        Logged in as
+      </Typography>
+      <Typography component="h1" variant="h5" className="whiteHeader">
+      {currentUser && currentUser.email}
+      </Typography>
+      
+    </div>
+    <Box mt={5}>
+      <Copyright />
+    </Box>
+  </Container>
+   )
   }
   
 
@@ -74,11 +103,11 @@ export default function SignUp() {
           Sign up
         </Typography>
         <Typography component="h1" variant="h5" className="whiteHeader">
-        {currentUser.email}
+        {currentUser && currentUser.email}
         </Typography>
         {error && <Alert severity="error">{error}</Alert>}
         
-        <form className={classes.form} noValidate>
+        <form className={classes.form} >
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
